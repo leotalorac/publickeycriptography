@@ -1,4 +1,6 @@
-from itertools import combinations_with_replacement 
+symbols = ['0','1','2','3','4','5','6','7','8','9']
+for i in range(26):
+    symbols.append(chr(65+i))
 # sum polynomials
 def sum(a,b,n):
     ac = a[::-1]
@@ -12,6 +14,13 @@ def sum(a,b,n):
             c.append(0)
     c = c[::-1]
     return c
+def polyToNum(poly,b):
+    sp = 0
+    poly = poly[::-1]
+    
+    for i in range(len(poly)):
+        sp = sp + (b**i)*(int(poly[i]))
+    return symbols[int(sp)]
 # shit of bits 
 def move(l,i,m):
     lt = l.copy()
@@ -80,20 +89,44 @@ def gf(p,n,pol):
         ltem = []
         ltem2 = []
         for j in numbers:
-            ltem.append(sum(i,j,p))
+            ltem.append(polyToNum(sum(i,j,p),p))
             m = mul(i,j,p)
             mt = extended_synthetic_division(m,pol)[1]
             mt = sum(mt,zero,p)
-            ltem2.append(mt)
+            # ltem2.append(mt)
+            ltem2.append(polyToNum(mt,p))
         if(ii==9):
             print(ltem2)
         ii=ii+1
         sums.append(ltem)
         multiplications.append(ltem2)
-    return [multiplications,sums]
+    numbersc = list()
+    for i in numbers:
+        numbersc.append(polyToNum(i,p))
+    return [multiplications,sums,numbersc]
 
-gfs = gf(2,4,[1,0,0,1,1])
-print("multiplications")
-print(gfs[0])
-print("sums")
-print(gfs[1])
+# graphics tables
+def graphgf(gf):
+    print("multiplications")
+    print("n "+str(gf[2]))
+    index = 0
+    for i in gf[0]:
+        print(gf[2][index],end=" ")
+        print(i)
+        index+=1
+    index=0
+    print("sum")
+    print("n "+str(gf[2]))
+    for i in gf[1]:
+        print(gf[2][index],end=" ")
+        print(i)
+        index+=1
+
+gfs = gf(3,3,[1,0,1,1])
+graphgf(gfs)
+# print("multiplications")
+# print(gfs[0])
+# print("sums")
+# print(gfs[1])
+# print("numbersc")
+# print(gfs[2])

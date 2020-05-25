@@ -1,1 +1,3 @@
 env
+*.out
+src/fieldGenerator/field.out
