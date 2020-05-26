@@ -122,11 +122,5 @@ def graphgf(gf):
         print(i)
         index+=1
 
-gfs = gf(3,3,[1,0,1,1])
+gfs = gf(3,3,[1,0,2,1])
 graphgf(gfs)
-# print("multiplications")
-# print(gfs[0])
-# print("sums")
-# print(gfs[1])
-# print("numbersc")
-# print(gfs[2])
