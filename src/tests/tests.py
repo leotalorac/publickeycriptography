@@ -32,8 +32,9 @@ def findf(s,sf):
         if(s[i:i+len(sf)] == sf):
             c+=1
     return c
-def poker(n):
-    bn = bin(int(n,16))[2:]
+
+def poker(num):
+    bn = bin(int(num,16))[2:]
     n = len(bn)
     # get m
     m =1
@@ -56,5 +57,55 @@ def poker(n):
     pt = (((2**m)/k)*(sf))-k
     return pt
 
+def findf2(s,sf,cg):
+    c =0
+    index = 0
+    t=0
+    st =True
+    while(index<len(s)):
+        if(s[index] == cg):
+            t+=1
+        else:
+            st=True
+            t=0
+        if(t == len(sf)):
+            if(index!=len(s)-1):
+                if(s[index+1] !=cg and st):
+                    c+=1
+                else:
+                    st=False
+            else:
+                c+=1
+        index+=1    
+    return c
+
+def runs(num):
+    bn = bin(int(num,16))[2:]
+    n = len(bn)
+    # get k
+    e=6
+    es = []
+    i=0
+    while e>5:
+        e = (n-i+3)/(2**(i+2))
+        es.append(e)
+        i+=1
+    es.pop(0)
+    k=int(i-1)
+    z =[]
+    o =[]
+    for i in range(1,k+1):
+        zs = '0'*i
+        os = '1'*i
+        z.append(findf2(bn,zs,'1'))
+        o.append(findf2(bn,os,'0'))
+    s1 =0
+    s2 =0
+    print(es)
+    for i in range(k):
+        s1 += (((o[i]-es[i])**2)/es[i])
+        s2 += (((z[i]-es[i])**2)/es[i])
+    s = s1+s2
+    return s
 num = 'e3114ef249e3114ef249e3114ef249e3114ef249'
-print(poker(num))
+print(runs(num))
