@@ -215,7 +215,7 @@ class AES:
                 # Run word through S-box in the fourth iteration when using a
                 # 256-bit key.
                 word = [s_box[b] for b in word]
-            print(word)
+            
             # XOR with equivalent word from previous iteration.
             word = xor_bytes(word, key_columns[-iteration_size])
             key_columns.append(word)

@@ -122,5 +122,5 @@ def graphgf(gf):
         print(i)
         index+=1
 
-gfs = gf(3,3,[1,0,2,1])
+gfs = gf(2,5,[1,0,1,0,0,1])
 graphgf(gfs)
